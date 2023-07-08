@@ -1,1 +1,1 @@
-# inventory-application
+# inventory-application project
