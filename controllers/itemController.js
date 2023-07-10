@@ -3,7 +3,7 @@ const Item = require("../models/item");
 
 exports.itemList = async (req, res, next) => {
   try {
-    const items = await Item.find();
+    const items = await Item.find().populate('category', 'name')
     res.render("item_list", { items });
   } catch (err) {
     next(err);
@@ -13,7 +13,7 @@ exports.itemList = async (req, res, next) => {
 exports.itemDetail = async (req, res, next) => {
   try {
     const itemId = req.params.id;
-    const item = await Item.findById(itemId);
+    const item = await Item.findById(itemId).populate('category', 'name');
     res.render("item_detail", { item });
   } catch (err) {
     next(err);
