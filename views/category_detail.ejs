@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Category Detail</title>
+    <link rel="stylesheet" href="../styles/styles.css" />
+  </head>
+  <body>
+    <h1>Category Detail</h1>
+    <div class="nav-link">
+      <a href="/">Home</a>
+    </div>
+    <div class="container">
+      <h2><%= category.name %></h2>
+      <p><%= category.description %></p>
+      <a href="<%= '/categories/' +category._id + '/delete' %>">Delete</a>
+      <a href="<%= '/categories/' +category._id + '/update' %>">update</a>
+      <h3>Items in this Category:</h3>
+      <ul>
+        <% items.forEach(function(item) { %>
+        <li><a href="/items/<%= item._id %>"><%= item.name %></a></li>
+        <% }); %>
+      </ul>
+    </div>
+  </body>
+</html>
