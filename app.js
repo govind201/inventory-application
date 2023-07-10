@@ -2,11 +2,12 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const logger = require("morgan");
-
+require("dotenv").config();
 const indexRouter = require("./routes/index");
 const itemsRouter = require("./routes/items");
 const categoriesRouter = require("./routes/categories");
-require("dotenv").config();
+const errorHandler = require('./utils/errorHandler');
+
 
 const app = express();
 
@@ -23,6 +24,9 @@ app.use(express.static(path.join(__dirname, "assets")));
 app.use("/", indexRouter);
 app.use("/items", itemsRouter);
 app.use("/categories", categoriesRouter);
+app.use(errorHandler.handleNotFound);
+app.use(errorHandler.handleError);
+
 
 const DB_URL = process.env.DB_URL;
 
@@ -34,5 +38,3 @@ mongoose
   });
 
 app.listen(3000, () => console.log("app listening on port 3000!"));
-
-module.exports = app;
