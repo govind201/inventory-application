@@ -1,3 +1,4 @@
+const Category = require("../models/category");
 const Item = require("../models/item");
 
 exports.itemList = async (req, res, next) => {
@@ -19,8 +20,13 @@ exports.itemDetail = async (req, res, next) => {
   }
 };
 
-exports.itemCreateForm = (req, res) => {
-  res.render("item_create");
+exports.itemCreateForm =  async(req, res, next) => {
+  try {
+    const categories = await Category.find();
+    res.render("item_create", {categories});
+  } catch (err) {
+    next(err);
+  }
 };
 
 exports.itemCreate = async (req, res, next) => {
@@ -49,7 +55,8 @@ exports.itemUpdateForm = async (req, res, next) => {
   try {
     const itemId = req.params.id;
     const item = await Item.findById(itemId);
-    res.render("item_update", { item });
+    const categories = await Category.find();
+    res.render("item_update", { item, categories });
   } catch (err) {
     next(err);
   }

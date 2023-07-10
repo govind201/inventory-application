@@ -1,4 +1,5 @@
 const Category = require("../models/category");
+const item = require("../models/item");
 
 exports.categoryList = async (req, res, next) => {
   try {
@@ -13,7 +14,8 @@ exports.categoryDetail = async (req, res, next) => {
   try {
     const categoryId = req.params.id;
     const category = await Category.findById(categoryId);
-    res.render("category_detail", { category });
+    const itemsInCategory = await item.find({ category: categoryId });
+    res.render("category_detail", { category, items: itemsInCategory });
   } catch (err) {
     next(err);
   }
@@ -49,7 +51,7 @@ exports.categoryUpdateForm = async (req, res, next) => {
 
 exports.categoryUpdate = async (req, res, next) => {
   const categoryId = req.params.id;
-  const { name, description,} = req.body;
+  const { name, description } = req.body;
   try {
     await Category.findByIdAndUpdate(categoryId, { name, description });
     res.redirect("/categories");

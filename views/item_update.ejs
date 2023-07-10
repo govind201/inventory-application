@@ -22,13 +22,11 @@
 <%= item.description %></textarea
       ><br />
       <label for="category">Category:</label>
-      <input
-        type="text"
-        id="category"
-        name="category"
-        value="<%= item.category %>"
-        required
-      /><br />
+      <select id="category" name="category" required>
+        <% categories.forEach(function(category) { %>
+        <option value="<%= category._id %>"><%= category.name %></option>
+        <% }); %></select
+      ><br />
       <label for="price">Price:</label>
       <input
         type="number"
