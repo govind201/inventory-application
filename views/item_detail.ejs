@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Item Detail</title>
+    <link rel="stylesheet" href="/styles/styles.css" />
+  </head>
+  <body>
+    <h1>Item Detail</h1>
+    <div class="nav-link">
+      <a href="/">Home</a>
+    </div>
+    <div class="container">
+      <h2><%= item.name %></h2>
+      <p><%= item.description %></p>
+      <p>Category: <%= item.category %></p>
+      <p>Price: $<%= item.price %></p>
+      <p>Number in Stock: <%= item.numberInStock %></p>
+      <a href="<%= '/items/' +item._id + '/delete' %>">Delete</a>
+      <a href="<%= '/items/' +item._id + '/update' %>">Update</a>
+    </div>
+  </body>
+</html>
